@@ -16,7 +16,8 @@
         </app-game-badge>
       </div>
     </div>
-    Avg points scored: Avg points conceded:
+    <p>Avg points scored: <span class="score">{{ average_score | number : '1.0-0'}}</span></p>
+    <p>Avg points conceded: <span class="score">{{ average_conceded | number : '1.0-0' }}</span></p>
 
     <a> See game results > > </a>
   </div>

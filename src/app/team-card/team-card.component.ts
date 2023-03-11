@@ -15,6 +15,8 @@ export class TeamCardComponent implements AfterViewInit {
   public team!: Team;
 
   public recentGames?: Observable<Game[]>;
+  public average_conceded: number = 0;
+  public average_score: number = 0;
   constructor(
     private teamTracker: TeamTrackerService,
     public nbaService: NBAService,
@@ -23,6 +25,21 @@ export class TeamCardComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.recentGames = this.nbaService.getRecentGames(this.team.id);
+    this.recentGames.subscribe((games) => {
+      let point = 0;
+      let point_conceded = 0;
+      for (const game of games) {
+        if (game.home_team.id === this.team.id) {
+          point += game.home_team_score;
+          point_conceded += game.visitor_team_score;
+        } else {
+          point += game.visitor_team_score;
+          point_conceded += game.home_team_score;
+        }
+        this.average_score = point / games.length;
+        this.average_conceded = point_conceded / games.length;
+      }
+    });
     this.teamService.team = this.team;
   }
 
