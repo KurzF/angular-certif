@@ -1,0 +1,10 @@
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.game_result {
+  display: flex;
+  flex-direction: row;
+}

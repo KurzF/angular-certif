@@ -1,7 +1,9 @@
-<select>
-  <option *ngFor="let team of teams | async">{{ team.full_name }}</option>
+<select #teamSelect id="teamSelect">
+  <option *ngFor="let team of teams | async" [value]="team.id">
+    {{ team.full_name }}
+  </option>
 </select>
-<button>Track team</button>
+<button id="trackBtn" (click)="trackTeam()">Track team</button>
 
 <!-- 
 Copyright Google LLC. All Rights Reserved.

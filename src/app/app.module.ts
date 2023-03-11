@@ -4,12 +4,13 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './product-list/product-list.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TeamTrackerComponent } from './team-tracker/team-tracker.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamCardComponent } from './team-card/team-card.component';
+import { ConferencePipe } from './conference.pipe';
+import { GameBadgeComponent } from './game-badge/game-badge.component';
 
 @NgModule({
   imports: [
@@ -21,10 +22,11 @@ import { TeamCardComponent } from './team-card/team-card.component';
   declarations: [
     AppComponent,
     SearchBarComponent,
-    ProductListComponent,
     TeamTrackerComponent,
     TeamListComponent,
     TeamCardComponent,
+    ConferencePipe,
+    GameBadgeComponent,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,1 +1,3 @@
-<p>team-list works!</p>
+<p *ngFor="let team of _teamTracker.trackedTeams">
+  <app-team-card [team]="team"></app-team-card>
+</p>

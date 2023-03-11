@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Team, TeamsService } from '../teams.service';
+import { filter, find } from 'rxjs/operators';
+import { TeamTrackerService } from '../team-tracker.service';
+import { Team, NBAService } from '../nba.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,8 +10,25 @@ import { Team, TeamsService } from '../teams.service';
   styleUrls: ['./search-bar.component.css'],
 })
 export class SearchBarComponent {
-  public teams: Observable<Team[]> = this.teamsService.getAllTeams().pipe(map(page => page.data));
-  constructor(public teamsService: TeamsService) {}
+  @ViewChild('teamSelect')
+  public select!: ElementRef;
+
+  public teams: Observable<Team[]> = this.teamsService.getAllTeams();
+
+  constructor(
+    public teamsService: NBAService,
+    private teamTracker: TeamTrackerService
+  ) {}
+
+  trackTeam() {
+    const id = this.select.nativeElement.value;
+    this.teamsService.getAllTeams().subscribe((teams) => {
+      const selectedTeam = teams.find((team) => team.id == id);
+      if (selectedTeam) {
+        this.teamTracker.trackedTeams.add(selectedTeam);
+      }
+    });
+  }
 }
 
 /*
